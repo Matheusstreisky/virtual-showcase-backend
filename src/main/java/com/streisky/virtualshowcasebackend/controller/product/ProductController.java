@@ -3,6 +3,7 @@ package com.streisky.virtualshowcasebackend.controller.product;
 import java.net.URI;
 
 import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
+import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
 import com.streisky.virtualshowcasebackend.service.product.ProductService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -61,6 +62,8 @@ public class ProductController {
         try {
             productService.delete(id);
             return ResponseEntity.ok().build();
+        } catch (VirtualShowcaseNotFoundException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -70,6 +73,8 @@ public class ProductController {
     public ResponseEntity<ProductDTO> find(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(productService.find(id));
+        } catch (VirtualShowcaseNotFoundException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
