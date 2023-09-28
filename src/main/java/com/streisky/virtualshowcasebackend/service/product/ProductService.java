@@ -1,13 +1,12 @@
 package com.streisky.virtualshowcasebackend.service.product;
 
 
-import java.util.Objects;
+import java.util.Optional;
 
 import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
 import com.streisky.virtualshowcasebackend.entity.product.Product;
 import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
 import com.streisky.virtualshowcasebackend.repository.product.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,21 +24,21 @@ public class ProductService {
     }
 
     public void delete(Long id) throws VirtualShowcaseNotFoundException {
-        try {
-            Product product = productRepository.getReferenceById(id);
-            product.inactivate();
-        } catch (EntityNotFoundException e) {
+        Optional<Product> product = productRepository.findByIdAndActivateTrue(id);
+        if (product.isEmpty()) {
             throw new VirtualShowcaseNotFoundException(id);
         }
+
+        product.get().inactivate();
     }
 
     public ProductDTO find(Long id) throws VirtualShowcaseNotFoundException {
-        Product product = productRepository.findByIdAndActivateTrue(id);
-        if (Objects.isNull(product)) {
+        Optional<Product> product = productRepository.findByIdAndActivateTrue(id);
+        if (product.isEmpty()) {
             throw new VirtualShowcaseNotFoundException(id);
         }
 
-        return product.toDTO();
+        return product.get().toDTO();
     }
 
     public Page<ProductDTO> findAll(Pageable pageable) {
