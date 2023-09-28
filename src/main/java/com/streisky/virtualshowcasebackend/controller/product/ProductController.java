@@ -3,7 +3,6 @@ package com.streisky.virtualshowcasebackend.controller.product;
 import java.net.URI;
 
 import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
-import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
 import com.streisky.virtualshowcasebackend.service.product.ProductService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -32,60 +31,36 @@ public class ProductController {
     @PostMapping
     @Transactional
     public ResponseEntity<ProductDTO> register(@RequestBody @Valid ProductDTO productDTO) {
-        try {
-            ProductDTO savedProduct = productService.save(productDTO);
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(savedProduct.id())
-                    .toUri();
+        ProductDTO savedProduct = productService.save(productDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedProduct.id())
+                .toUri();
 
-            return ResponseEntity.created(location).body(savedProduct);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.created(location).body(savedProduct);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity<ProductDTO> update(@RequestBody @Valid ProductDTO productDTO) {
-        try {
-            return ResponseEntity.ok(productService.save(productDTO));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(productService.update(productDTO));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        try {
-            productService.delete(id);
-            return ResponseEntity.ok().build();
-        } catch (VirtualShowcaseNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        productService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> find(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(productService.find(id));
-        } catch (VirtualShowcaseNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(productService.find(id));
     }
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(@PageableDefault(size = 10, sort = "description") Pageable pageable) {
-        try {
-            return ResponseEntity.ok(productService.findAll(pageable));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(productService.findAll(pageable));
     }
 }

@@ -2,6 +2,7 @@ package com.streisky.virtualshowcasebackend.entity.product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import com.streisky.virtualshowcasebackend.dto.image.ImageDTO;
 import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
@@ -60,6 +61,37 @@ public class Product {
 
     private List<ImageDTO> mapImagesDTO() {
         return getImages() != null ? getImages().stream().map(Image::toDTO).toList() : null;
+    }
+
+    public void updateData(ProductDTO productDTO) {
+        if (Objects.nonNull(productDTO.description())) {
+            setDescription(productDTO.description());
+        }
+
+        if (Objects.nonNull(productDTO.amount())) {
+            setAmount(productDTO.amount());
+        }
+
+        if (Objects.nonNull(productDTO.images())) {
+            productDTO.images().forEach(imageDTO -> {
+                getImages().stream()
+                        .filter(image -> Objects.equals(image.getId(), imageDTO.id()))
+                        .findFirst()
+                        .ifPresent(image -> {
+                            if (Objects.nonNull(imageDTO.description())) {
+                                image.setDescription(imageDTO.description());
+                            }
+
+                            if (Objects.nonNull(imageDTO.image())) {
+                                image.setImage(image.getImage());
+                            }
+                        });
+            });
+        }
+
+        if (Objects.nonNull(productDTO.observation())) {
+            setObservation(productDTO.observation());
+        }
     }
 
     public void inactivate() {
