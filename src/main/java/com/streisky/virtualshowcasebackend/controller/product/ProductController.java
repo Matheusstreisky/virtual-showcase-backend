@@ -30,7 +30,7 @@ public class ProductController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ProductDTO> register(@RequestBody @Valid ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> save(@RequestBody @Valid ProductDTO productDTO) {
         ProductDTO savedProduct = productService.save(productDTO);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
