@@ -60,7 +60,7 @@ public class Product {
     }
 
     private List<ImageDTO> mapImagesDTO() {
-        return getImages() != null ? getImages().stream().map(Image::toDTO).toList() : null;
+        return Objects.nonNull(getImages()) ? getImages().stream().map(Image::toDTO).toList() : null;
     }
 
     public void updateData(ProductDTO productDTO) {
@@ -73,25 +73,29 @@ public class Product {
         }
 
         if (Objects.nonNull(productDTO.images())) {
-            productDTO.images().forEach(imageDTO -> {
-                getImages().stream()
-                        .filter(image -> Objects.equals(image.getId(), imageDTO.id()))
-                        .findFirst()
-                        .ifPresent(image -> {
-                            if (Objects.nonNull(imageDTO.description())) {
-                                image.setDescription(imageDTO.description());
-                            }
-
-                            if (Objects.nonNull(imageDTO.image())) {
-                                image.setImage(image.getImage());
-                            }
-                        });
-            });
+            updateImagesData(productDTO.images());
         }
 
         if (Objects.nonNull(productDTO.observation())) {
             setObservation(productDTO.observation());
         }
+    }
+
+    private void updateImagesData(List<ImageDTO> imageDTOList) {
+        imageDTOList.forEach(imageDTO -> {
+            getImages().stream()
+                .filter(image -> Objects.equals(image.getId(), imageDTO.id()))
+                .findFirst()
+                .ifPresent(image -> {
+                    if (Objects.nonNull(imageDTO.description())) {
+                        image.setDescription(imageDTO.description());
+                    }
+
+                    if (Objects.nonNull(imageDTO.image())) {
+                        image.setImage(image.getImage());
+                    }
+                });
+        });
     }
 
     public void inactivate() {
