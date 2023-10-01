@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ErrorDTO;
 import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ValidationErrorDTO;
-import com.streisky.virtualshowcasebackend.exception.TokenCreationFailedException;
-import com.streisky.virtualshowcasebackend.exception.TokenInvalidException;
+import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenCreationFailedException;
+import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenInvalidException;
 import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

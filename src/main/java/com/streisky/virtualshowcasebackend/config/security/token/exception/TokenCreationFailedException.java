@@ -1,4 +1,4 @@
-package com.streisky.virtualshowcasebackend.exception;
+package com.streisky.virtualshowcasebackend.config.security.token.exception;
 
 public class TokenCreationFailedException extends RuntimeException {
 
