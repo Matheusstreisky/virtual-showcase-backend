@@ -39,10 +39,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String get(HttpServletRequest request) {
-        return request.getRequestURI();
-    }
-
     private String getTokenJWT(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
         return Objects.nonNull(authorizationHeader)
