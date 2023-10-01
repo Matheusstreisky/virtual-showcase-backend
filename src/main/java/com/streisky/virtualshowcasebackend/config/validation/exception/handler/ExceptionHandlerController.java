@@ -1,10 +1,10 @@
-package com.streisky.virtualshowcasebackend.validation.exception.handler;
+package com.streisky.virtualshowcasebackend.config.validation.exception.handler;
 
 import java.util.List;
 
+import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ErrorDTO;
+import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ValidationErrorDTO;
 import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
-import com.streisky.virtualshowcasebackend.validation.exception.dto.ErrorDTO;
-import com.streisky.virtualshowcasebackend.validation.exception.dto.ValidationErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
