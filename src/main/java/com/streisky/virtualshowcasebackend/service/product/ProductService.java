@@ -23,22 +23,33 @@ public class ProductService {
         return product.toDTO();
     }
 
+    public ProductDTO update(ProductDTO productDTO) {
+        Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(productDTO.id());
+        if (optionalProduct.isEmpty()) {
+            throw new VirtualShowcaseNotFoundException(productDTO.id());
+        }
+
+        Product product = optionalProduct.get();
+        product.updateData(productDTO);
+        return product.toDTO();
+    }
+
     public void delete(Long id) throws VirtualShowcaseNotFoundException {
-        Optional<Product> product = productRepository.findByIdAndActivateTrue(id);
-        if (product.isEmpty()) {
+        Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(id);
+        if (optionalProduct.isEmpty()) {
             throw new VirtualShowcaseNotFoundException(id);
         }
 
-        product.get().inactivate();
+        optionalProduct.get().inactivate();
     }
 
     public ProductDTO find(Long id) throws VirtualShowcaseNotFoundException {
-        Optional<Product> product = productRepository.findByIdAndActivateTrue(id);
-        if (product.isEmpty()) {
+        Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(id);
+        if (optionalProduct.isEmpty()) {
             throw new VirtualShowcaseNotFoundException(id);
         }
 
-        return product.get().toDTO();
+        return optionalProduct.get().toDTO();
     }
 
     public Page<ProductDTO> findAll(Pageable pageable) {
