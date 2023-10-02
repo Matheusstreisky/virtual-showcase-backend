@@ -10,6 +10,7 @@ import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundExce
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -42,6 +43,12 @@ public class ExceptionHandlerController {
     @ExceptionHandler(AccessDeniedException.class)
     public ErrorDTO handleAccessDeniedError() {
         return new ErrorDTO("Access denied.");
+    }
+
+    @ResponseStatus(code = HttpStatus.FORBIDDEN)
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ErrorDTO handleInvalidCredentialsError(UsernameNotFoundException ex) {
+        return new ErrorDTO(ex.getMessage());
     }
 
     @ResponseStatus(code = HttpStatus.FORBIDDEN)

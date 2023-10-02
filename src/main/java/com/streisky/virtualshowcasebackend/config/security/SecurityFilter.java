@@ -2,6 +2,7 @@ package com.streisky.virtualshowcasebackend.config.security;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.streisky.virtualshowcasebackend.config.security.token.TokenService;
 import com.streisky.virtualshowcasebackend.entity.account.Account;
@@ -31,9 +32,13 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (Objects.nonNull(token)) {
             String subject = tokenService.getSubject(token);
-            Account account = accountRepository.findByLogin(subject);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            Optional<Account> optionalAccount = accountRepository.findByLogin(subject);
+
+            if (optionalAccount.isPresent()) {
+                Account account = optionalAccount.get();
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
         }
 
         filterChain.doFilter(request, response);

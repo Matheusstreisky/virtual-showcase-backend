@@ -1,5 +1,8 @@
 package com.streisky.virtualshowcasebackend.config.security;
 
+import java.util.Optional;
+
+import com.streisky.virtualshowcasebackend.entity.account.Account;
 import com.streisky.virtualshowcasebackend.repository.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +18,12 @@ public class AuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByLogin(username);
+        Optional<Account> optionalAccount = userRepository.findByLogin(username);
+
+        if (optionalAccount.isEmpty()) {
+            throw new UsernameNotFoundException("Invalid credentials.");
+        }
+
+        return optionalAccount.get();
     }
 }
