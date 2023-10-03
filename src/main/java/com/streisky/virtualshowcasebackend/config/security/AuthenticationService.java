@@ -2,8 +2,8 @@ package com.streisky.virtualshowcasebackend.config.security;
 
 import java.util.Optional;
 
-import com.streisky.virtualshowcasebackend.entity.account.Account;
-import com.streisky.virtualshowcasebackend.repository.account.AccountRepository;
+import com.streisky.virtualshowcasebackend.domain.account.entity.Account;
+import com.streisky.virtualshowcasebackend.domain.account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

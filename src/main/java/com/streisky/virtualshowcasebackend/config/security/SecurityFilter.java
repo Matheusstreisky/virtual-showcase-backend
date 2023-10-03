@@ -5,8 +5,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import com.streisky.virtualshowcasebackend.config.security.token.TokenService;
-import com.streisky.virtualshowcasebackend.entity.account.Account;
-import com.streisky.virtualshowcasebackend.repository.account.AccountRepository;
+import com.streisky.virtualshowcasebackend.domain.account.entity.Account;
+import com.streisky.virtualshowcasebackend.domain.account.repository.AccountRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -2,7 +2,7 @@ package com.streisky.virtualshowcasebackend.controller.login;
 
 import com.streisky.virtualshowcasebackend.config.security.token.TokenDTO;
 import com.streisky.virtualshowcasebackend.config.security.token.TokenService;
-import com.streisky.virtualshowcasebackend.dto.account.AccountDTO;
+import com.streisky.virtualshowcasebackend.domain.account.dto.AccountDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

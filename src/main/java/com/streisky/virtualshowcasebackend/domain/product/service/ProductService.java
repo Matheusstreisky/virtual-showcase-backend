@@ -1,12 +1,12 @@
-package com.streisky.virtualshowcasebackend.service.product;
+package com.streisky.virtualshowcasebackend.domain.product.service;
 
 
 import java.util.Optional;
 
-import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
-import com.streisky.virtualshowcasebackend.entity.product.Product;
-import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
-import com.streisky.virtualshowcasebackend.repository.product.ProductRepository;
+import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
+import com.streisky.virtualshowcasebackend.domain.product.entity.Product;
+import com.streisky.virtualshowcasebackend.config.validation.exception.ResourceNotFoundException;
+import com.streisky.virtualshowcasebackend.domain.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +26,7 @@ public class ProductService {
     public ProductDTO update(ProductDTO productDTO) {
         Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(productDTO.id());
         if (optionalProduct.isEmpty()) {
-            throw new VirtualShowcaseNotFoundException(productDTO.id());
+            throw new ResourceNotFoundException(productDTO.id());
         }
 
         Product product = optionalProduct.get();
@@ -34,19 +34,19 @@ public class ProductService {
         return product.toDTO();
     }
 
-    public void delete(Long id) throws VirtualShowcaseNotFoundException {
+    public void delete(Long id) throws ResourceNotFoundException {
         Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(id);
         if (optionalProduct.isEmpty()) {
-            throw new VirtualShowcaseNotFoundException(id);
+            throw new ResourceNotFoundException(id);
         }
 
         optionalProduct.get().inactivate();
     }
 
-    public ProductDTO find(Long id) throws VirtualShowcaseNotFoundException {
+    public ProductDTO find(Long id) throws ResourceNotFoundException {
         Optional<Product> optionalProduct = productRepository.findByIdAndActivateTrue(id);
         if (optionalProduct.isEmpty()) {
-            throw new VirtualShowcaseNotFoundException(id);
+            throw new ResourceNotFoundException(id);
         }
 
         return optionalProduct.get().toDTO();

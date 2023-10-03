@@ -1,12 +1,12 @@
-package com.streisky.virtualshowcasebackend.dto.product;
+package com.streisky.virtualshowcasebackend.domain.product.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-import com.streisky.virtualshowcasebackend.dto.image.ImageDTO;
-import com.streisky.virtualshowcasebackend.entity.image.Image;
-import com.streisky.virtualshowcasebackend.entity.product.Product;
+import com.streisky.virtualshowcasebackend.domain.image.dto.ImageDTO;
+import com.streisky.virtualshowcasebackend.domain.image.entity.Image;
+import com.streisky.virtualshowcasebackend.domain.product.entity.Product;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

@@ -2,8 +2,8 @@ package com.streisky.virtualshowcasebackend.controller.product;
 
 import java.net.URI;
 
-import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
-import com.streisky.virtualshowcasebackend.service.product.ProductService;
+import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
+import com.streisky.virtualshowcasebackend.domain.product.service.ProductService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

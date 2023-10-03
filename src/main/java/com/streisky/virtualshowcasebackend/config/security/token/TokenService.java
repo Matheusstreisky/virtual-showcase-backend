@@ -8,7 +8,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.streisky.virtualshowcasebackend.entity.account.Account;
+import com.streisky.virtualshowcasebackend.domain.account.entity.Account;
 import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenCreationFailedException;
 import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenInvalidException;
 import org.springframework.beans.factory.annotation.Value;

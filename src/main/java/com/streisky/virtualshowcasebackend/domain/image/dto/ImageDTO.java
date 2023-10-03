@@ -1,7 +1,7 @@
-package com.streisky.virtualshowcasebackend.dto.image;
+package com.streisky.virtualshowcasebackend.domain.image.dto;
 
-import com.streisky.virtualshowcasebackend.entity.image.Image;
-import com.streisky.virtualshowcasebackend.entity.product.Product;
+import com.streisky.virtualshowcasebackend.domain.image.entity.Image;
+import com.streisky.virtualshowcasebackend.domain.product.entity.Product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

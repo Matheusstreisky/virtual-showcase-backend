@@ -1,4 +1,4 @@
-package com.streisky.virtualshowcasebackend.dto.account;
+package com.streisky.virtualshowcasebackend.domain.account.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
