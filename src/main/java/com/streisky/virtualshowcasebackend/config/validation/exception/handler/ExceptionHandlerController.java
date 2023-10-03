@@ -6,7 +6,7 @@ import com.streisky.virtualshowcasebackend.config.validation.exception.dto.Error
 import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ValidationErrorDTO;
 import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenCreationFailedException;
 import com.streisky.virtualshowcasebackend.config.security.token.exception.TokenInvalidException;
-import com.streisky.virtualshowcasebackend.exception.VirtualShowcaseNotFoundException;
+import com.streisky.virtualshowcasebackend.config.validation.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionHandlerController {
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    @ExceptionHandler(VirtualShowcaseNotFoundException.class)
-    public ErrorDTO handleNotFoundError(VirtualShowcaseNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ErrorDTO handleNotFoundError(ResourceNotFoundException ex) {
         return new ErrorDTO(ex.getMessage());
     }
 

@@ -1,7 +1,7 @@
-package com.streisky.virtualshowcasebackend.entity.image;
+package com.streisky.virtualshowcasebackend.domain.image.entity;
 
-import com.streisky.virtualshowcasebackend.dto.image.ImageDTO;
-import com.streisky.virtualshowcasebackend.entity.product.Product;
+import com.streisky.virtualshowcasebackend.domain.image.dto.ImageDTO;
+import com.streisky.virtualshowcasebackend.domain.product.entity.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,4 +1,4 @@
-package com.streisky.virtualshowcasebackend.entity.account;
+package com.streisky.virtualshowcasebackend.domain.account.entity;
 
 import java.util.Collection;
 import java.util.List;

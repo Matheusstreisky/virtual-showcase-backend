@@ -1,12 +1,12 @@
-package com.streisky.virtualshowcasebackend.entity.product;
+package com.streisky.virtualshowcasebackend.domain.product.entity;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-import com.streisky.virtualshowcasebackend.dto.image.ImageDTO;
-import com.streisky.virtualshowcasebackend.dto.product.ProductDTO;
-import com.streisky.virtualshowcasebackend.entity.image.Image;
+import com.streisky.virtualshowcasebackend.domain.image.dto.ImageDTO;
+import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
+import com.streisky.virtualshowcasebackend.domain.image.entity.Image;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
