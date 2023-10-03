@@ -1,4 +1,4 @@
-package com.streisky.virtualshowcasebackend.validation.exception.dto;
+package com.streisky.virtualshowcasebackend.config.validation.exception.dto;
 
 import org.springframework.validation.FieldError;
 
