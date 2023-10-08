@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.streisky.virtualshowcasebackend.domain.image.dto.ImageDTO;
-import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import com.streisky.virtualshowcasebackend.domain.image.entity.Image;
+import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
