@@ -20,7 +20,7 @@ jobs:
           architecture: x64
 
       - name: Clean and build
-        run: mvn -B -e clean install -DskipTests
+        run: mvn -B clean install -DskipTests
 
       - name: Run tests
-        run: ./mvnw -B -e verify
+        run: mvn -B -e verify
