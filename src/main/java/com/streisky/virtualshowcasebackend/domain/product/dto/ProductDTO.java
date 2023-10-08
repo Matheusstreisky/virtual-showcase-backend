@@ -27,10 +27,7 @@ public record ProductDTO(
 ) {
 
     public Product toEntity() {
-        Product product = (Objects.nonNull(id()) && id() > 0)
-                ? new Product(id(), activate(), description(), amount(), null, observation())
-                : new Product(id(), description(), amount(), null, observation());
-
+        Product product = new Product(id(), activate(), description(), amount(), null, observation());
         product.setImages(mapImageEntity(product));
         return product;
     }

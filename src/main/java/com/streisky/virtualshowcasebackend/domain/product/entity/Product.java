@@ -46,15 +46,6 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String observation;
 
-    public Product(Long id, String description, BigDecimal amount, List<Image> images, String observation) {
-        this.id = id;
-        this.activate = true;
-        this.description = description;
-        this.amount = amount;
-        this.images = images;
-        this.observation = observation;
-    }
-
     public ProductDTO toDTO() {
         return new ProductDTO(getId(), getActivate(), getDescription(), getAmount(), mapImagesDTO(), getObservation());
     }
