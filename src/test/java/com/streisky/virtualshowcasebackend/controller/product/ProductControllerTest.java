@@ -54,14 +54,14 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    void requestPostWithInvalidBodyTest() throws Exception {
+    void shouldReturnBadRequestStatus_WhenRequestPostWithInvalidBody_Test() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(PRODUCT_URL)).andReturn().getResponse();
         Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
     }
 
     @Test
     @WithMockUser
-    void requestPostWithValidBodyTest() throws Exception {
+    void shouldCreateProduct_AndReturnCreatedStatus_WhenRequestPostWithValidBody_Test() throws Exception {
         Mockito.when(productService.save(Mockito.any())).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
@@ -80,14 +80,14 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    void requestPutWithInvalidBodyTest() throws Exception {
+    void shouldReturnBadRequestStatus_WhenRequestPutWithInvalidBody_Test() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.put(PRODUCT_URL)).andReturn().getResponse();
         Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
     }
 
     @Test
     @WithMockUser
-    void requestPutWithValidBodyTest() throws Exception {
+    void shouldUpdateProduct_AndReturnOkStatus_WhenRequestPutWithValidBody_Test() throws Exception {
         Mockito.when(productService.update(Mockito.any())).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
@@ -106,7 +106,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    void requestDeleteTest() throws Exception {
+    void shouldDeleteProduct_AndReturnNoContentStatus_WhenRequestDeleteWithValidId_Test() throws Exception {
         Mockito.doNothing().when(productService).delete(Mockito.anyLong());
 
         MockHttpServletResponse response = mockMvc
@@ -122,7 +122,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    void requestFindTest() throws Exception {
+    void shouldReturnProduct_AndReturnOkStatus_WhenRequestGetWithValidId_Test() throws Exception {
         Mockito.when(productService.find(Mockito.anyLong())).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
@@ -140,7 +140,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    void requestFindAllTest() throws Exception {
+    void shouldReturnAllProducts_AndReturnOkStatus_WhenRequestGetWithValidId_Test() throws Exception {
         Page<ProductDTO> productDTOPage = new PageImpl<>(List.of(PRODUCT_DTO_ACTIVE), PAGE_REQUEST_DEFAULT, 1);
         Mockito.when(productService.findAll(Mockito.any(Pageable.class))).thenReturn(productDTOPage);
 

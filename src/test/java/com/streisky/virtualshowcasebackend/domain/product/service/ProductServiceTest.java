@@ -35,7 +35,7 @@ class ProductServiceTest {
     private ProductRepository productRepository;
 
     @Test
-    public void saveSuccessfullyTest() {
+    public void shouldSaveProductSuccessfully_Test() {
         Product productEntity = PRODUCT_DTO_ACTIVE.toEntity();
         Mockito.when(productRepository.save(Mockito.any(Product.class))).thenReturn(productEntity);
         ProductDTO productDTO = productService.save(PRODUCT_DTO_ACTIVE);
@@ -43,12 +43,12 @@ class ProductServiceTest {
     }
 
     @Test
-    public void updateSuccessfullyTest() {
+    public void shouldUpdateProductSuccessfully_Test() {
         ProductDTO productToUpdateDTO = new ProductDTO(1L, true, "Product updated", new BigDecimal(30),
                 List.of(
                         new ImageDTO(1L, "Image updated test 1", new byte[1]),
                         new ImageDTO(2L, "Image updated test 2", new byte[2])
-                ), "Test update");;
+                ), "Test update");
 
         Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         ProductDTO productUpdatedDTO = productService.update(productToUpdateDTO);
@@ -67,26 +67,26 @@ class ProductServiceTest {
     }
 
     @Test
-    public void deleteSuccessfullyTest() {
+    public void shouldDeleteProductSuccessfully_Test() {
         Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         Assertions.assertDoesNotThrow(() -> productService.delete(PRODUCT_DTO_ACTIVE.id()));
     }
 
     @Test
-    public void findSuccessfullyTest() {
+    public void shouldFindProductSuccessfully_Test() {
         Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         Assertions.assertDoesNotThrow(() -> productService.find(PRODUCT_DTO_ACTIVE.id()));
     }
 
     @Test
-    public void findAllSuccessfullyTest() {
+    public void shouldFindAllProductsSuccessfully_Test() {
         Page<Product> productPage = new PageImpl<>(List.of(PRODUCT_DTO_ACTIVE.toEntity()), PAGE_REQUEST_DEFAULT, 1);
         Mockito.when(productRepository.findAllByActivateTrue(Mockito.any(Pageable.class))).thenReturn(productPage);
         Assertions.assertDoesNotThrow(() -> productService.findAll(PAGE_REQUEST_DEFAULT));
     }
 
     @Test
-    public void resourceNotFoundTest() {
+    public void shouldThrowsResourceNotFoundException_WhenTryUpdateDeleteOrFind_ProductWithInvalidId_Test() {
         Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceNotFoundException.class, () -> productService.update(PRODUCT_DTO_ACTIVE));
         Assertions.assertThrows(ResourceNotFoundException.class, () -> productService.delete(PRODUCT_DTO_ACTIVE.id()));
