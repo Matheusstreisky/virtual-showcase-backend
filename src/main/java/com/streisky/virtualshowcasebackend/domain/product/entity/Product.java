@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.streisky.virtualshowcasebackend.domain.image.dto.ImageDTO;
-import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import com.streisky.virtualshowcasebackend.domain.image.entity.Image;
+import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,15 +45,6 @@ public class Product {
 
     @Column(columnDefinition = "TEXT")
     private String observation;
-
-    public Product(Long id, String description, BigDecimal amount, List<Image> images, String observation) {
-        this.id = id;
-        this.activate = true;
-        this.description = description;
-        this.amount = amount;
-        this.images = images;
-        this.observation = observation;
-    }
 
     public ProductDTO toDTO() {
         return new ProductDTO(getId(), getActivate(), getDescription(), getAmount(), mapImagesDTO(), getObservation());
