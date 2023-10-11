@@ -62,7 +62,7 @@ class ProductControllerTest {
     @Test
     @WithMockUser
     void shouldCreateProduct_AndReturnCreatedStatus_WhenRequestPostWithValidBody_Test() throws Exception {
-        Mockito.when(productService.save(Mockito.any())).thenReturn(PRODUCT_DTO_ACTIVE);
+        Mockito.when(productService.save(Mockito.any(ProductDTO.class))).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
                 .perform(
@@ -71,7 +71,8 @@ class ProductControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(productDTORequestJson.write(PRODUCT_DTO_ACTIVE).getJson())
                 )
-                .andReturn().getResponse();
+                .andReturn()
+                .getResponse();
         String jsonExpected = productDTOResponseJson.write(PRODUCT_DTO_ACTIVE).getJson();
 
         Assertions.assertEquals(HttpStatus.CREATED.value(), response.getStatus());
@@ -88,7 +89,7 @@ class ProductControllerTest {
     @Test
     @WithMockUser
     void shouldUpdateProduct_AndReturnOkStatus_WhenRequestPutWithValidBody_Test() throws Exception {
-        Mockito.when(productService.update(Mockito.any())).thenReturn(PRODUCT_DTO_ACTIVE);
+        Mockito.when(productService.update(Mockito.any(ProductDTO.class))).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
                 .perform(
@@ -97,7 +98,8 @@ class ProductControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(productDTORequestJson.write(PRODUCT_DTO_ACTIVE).getJson())
                 )
-                .andReturn().getResponse();
+                .andReturn()
+                .getResponse();
         String jsonExpected = productDTOResponseJson.write(PRODUCT_DTO_ACTIVE).getJson();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -107,15 +109,16 @@ class ProductControllerTest {
     @Test
     @WithMockUser
     void shouldDeleteProduct_AndReturnNoContentStatus_WhenRequestDeleteWithValidId_Test() throws Exception {
-        Mockito.doNothing().when(productService).delete(Mockito.anyLong());
+        Mockito.doNothing().when(productService).delete(PRODUCT_DTO_ACTIVE.id());
 
         MockHttpServletResponse response = mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .delete(PRODUCT_URL_WITH_ID, Mockito.anyLong())
+                                .delete(PRODUCT_URL_WITH_ID, PRODUCT_DTO_ACTIVE.id())
                                 .contentType(MediaType.TEXT_PLAIN)
                 )
-                .andReturn().getResponse();
+                .andReturn()
+                .getResponse();
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT.value(), response.getStatus());
     }
@@ -123,15 +126,16 @@ class ProductControllerTest {
     @Test
     @WithMockUser
     void shouldReturnProduct_AndReturnOkStatus_WhenRequestGetWithValidId_Test() throws Exception {
-        Mockito.when(productService.find(Mockito.anyLong())).thenReturn(PRODUCT_DTO_ACTIVE);
+        Mockito.when(productService.find(PRODUCT_DTO_ACTIVE.id())).thenReturn(PRODUCT_DTO_ACTIVE);
 
         MockHttpServletResponse response = mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get(PRODUCT_URL_WITH_ID, Mockito.anyLong())
+                                .get(PRODUCT_URL_WITH_ID, PRODUCT_DTO_ACTIVE.id())
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andReturn().getResponse();
+                .andReturn()
+                .getResponse();
         String jsonExpected = productDTOResponseJson.write(PRODUCT_DTO_ACTIVE).getJson();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -150,7 +154,8 @@ class ProductControllerTest {
                                 .get(PRODUCT_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andReturn().getResponse();
+                .andReturn()
+                .getResponse();
         String jsonExpected = productDTOListResponseJson.write(productDTOPage).getJson();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

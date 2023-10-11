@@ -50,8 +50,9 @@ class ProductServiceTest {
                         new ImageDTO(2L, "Image updated test 2", new byte[2])
                 ), "Test update");
 
-        Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
+        Mockito.when(productRepository.findByIdAndActivateTrue(PRODUCT_DTO_ACTIVE.id())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         ProductDTO productUpdatedDTO = productService.update(productToUpdateDTO);
+
         Assertions.assertEquals(productToUpdateDTO.description(), productUpdatedDTO.description());
         Assertions.assertEquals(productToUpdateDTO.amount(), productUpdatedDTO.amount());
         Assertions.assertEquals(productToUpdateDTO.observation(), productUpdatedDTO.observation());
@@ -68,13 +69,13 @@ class ProductServiceTest {
 
     @Test
     public void shouldDeleteProductSuccessfully_Test() {
-        Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
+        Mockito.when(productRepository.findByIdAndActivateTrue(PRODUCT_DTO_ACTIVE.id())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         Assertions.assertDoesNotThrow(() -> productService.delete(PRODUCT_DTO_ACTIVE.id()));
     }
 
     @Test
     public void shouldFindProductSuccessfully_Test() {
-        Mockito.when(productRepository.findByIdAndActivateTrue(Mockito.anyLong())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
+        Mockito.when(productRepository.findByIdAndActivateTrue(PRODUCT_DTO_ACTIVE.id())).thenReturn(Optional.of(PRODUCT_DTO_ACTIVE.toEntity()));
         Assertions.assertDoesNotThrow(() -> productService.find(PRODUCT_DTO_ACTIVE.id()));
     }
 
