@@ -3,9 +3,9 @@ package com.streisky.virtualshowcasebackend.domain.product.service;
 
 import java.util.Optional;
 
+import com.streisky.virtualshowcasebackend.config.validation.exception.ResourceNotFoundException;
 import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import com.streisky.virtualshowcasebackend.domain.product.entity.Product;
-import com.streisky.virtualshowcasebackend.config.validation.exception.ResourceNotFoundException;
 import com.streisky.virtualshowcasebackend.domain.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -4,6 +4,7 @@ import java.net.URI;
 
 import com.streisky.virtualshowcasebackend.domain.product.dto.ProductDTO;
 import com.streisky.virtualshowcasebackend.domain.product.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/products")
+@Transactional
+@SecurityRequirement(name = "bearer-key")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
     @PostMapping
-    @Transactional
     public ResponseEntity<ProductDTO> save(@RequestBody @Valid ProductDTO productDTO) {
         ProductDTO savedProduct = productService.save(productDTO);
         URI location = ServletUriComponentsBuilder
@@ -42,13 +44,11 @@ public class ProductController {
     }
 
     @PutMapping
-    @Transactional
     public ResponseEntity<ProductDTO> update(@RequestBody @Valid ProductDTO productDTO) {
         return ResponseEntity.ok(productService.update(productDTO));
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return ResponseEntity.noContent().build();
