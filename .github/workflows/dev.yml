@@ -1,8 +1,9 @@
-name: Dev branch CI
+name: Run Tests CI
 
 on:
   pull_request:
     branches:
+      - main
       - dev
 
 jobs:
