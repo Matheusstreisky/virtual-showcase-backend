@@ -8,6 +8,7 @@ import com.streisky.virtualshowcasebackend.config.validation.exception.ResourceN
 import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ErrorDTO;
 import com.streisky.virtualshowcasebackend.config.validation.exception.dto.ValidationErrorDTO;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,12 @@ public class ExceptionHandlerController {
     public List<ValidationErrorDTO> handleValidationError(MethodArgumentNotValidException ex) {
         List<FieldError> errors = ex.getFieldErrors();
         return errors.stream().map(ValidationErrorDTO::new).toList();
+    }
+
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(BadCredentialsException.class)
+    public ErrorDTO handleBadCredentialsError() {
+        return new ErrorDTO("Invalid credentials.");
     }
 
     @ResponseStatus(code = HttpStatus.FORBIDDEN)
