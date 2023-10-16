@@ -20,13 +20,6 @@ jobs:
           distribution: 'temurin'
           architecture: x64
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ github.base_ref }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-${{ github.base_ref }}
-
       - name: Clean and build
         run: mvn -B -e clean install -DskipTests
 
